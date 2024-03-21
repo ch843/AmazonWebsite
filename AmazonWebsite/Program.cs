@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BookContext>(options =>
 {
-    options.UseSqlite(builder.Configuration["ConnectionStrings:MovieConnection"]);
+    options.UseSqlite(builder.Configuration["ConnectionStrings:BookConnection"]);
 });
 
 builder.Services.AddScoped<IBookRepository, EfBookRepository>();

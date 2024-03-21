@@ -1,6 +1,4 @@
-﻿using AmazonWebsite.Models.Book
-
-@model List<Book>
+﻿@model IEnumerable<AmazonWebsite.Models.Book>
 
 <div class="row text-center">
     <h1>Online Bookstore</h1>
@@ -18,31 +16,19 @@
             <th>Price</th>
         </tr>
         </thead>
-        @{
-            int page = 1;
-            int counter = 0;
-
-            foreach (var b in Model)
-            {
-                <tbody>
-                <tr>
-                    <td>@b.Title</td>
-                    <td>@b.Author</td>
-                    <td>@b.Publisher</td>
-                    <td>@b.Isbn</td>
-                    <td>@b.Classification @b.Category</td>
-                    <td>@b.Pages</td>
-                    <td>@b.Price</td>
-                </tr>
-                </tbody>
-
-                counter++;
-                if (counter == 10)
-                {
-                    page++;
-                }
-            }
+        @foreach (var b in Model)
+        {
+            <tbody>
+            <tr>
+                <td>@b.Title</td>
+                <td>@b.Author</td>
+                <td>@b.Publisher</td>
+                <td>@b.Isbn</td>
+                <td>@b.Classification @b.Category</td>
+                <td>@b.PageCount</td>
+                <td>@b.Price</td>
+            </tr>
+            </tbody>
         }
     </table>
-    <p>Page Num: @page</p>
 </div>
