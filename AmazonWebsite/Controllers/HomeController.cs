@@ -14,9 +14,19 @@ public class HomeController : Controller
         _repo = temp;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int pageNum = 1)
     {
-        IEnumerable<Book> books = _repo.Books;
+        int pageSize = 10;
+        
+        var books = _repo.Books
+            .OrderBy(x => x.Title)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
+
+        ViewBag.PageCount = (int)Math.Ceiling((double)books.Count() / pageSize);
+        ViewBag.PageNum = pageNum;
+        ViewBag.PageSize = pageSize;
+        
         return View(books);
     }
 }

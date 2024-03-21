@@ -1,34 +1,64 @@
-﻿@model IEnumerable<AmazonWebsite.Models.Book>
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<AmazonWebsite.Models.Book>
 
 <div class="row text-center">
-    <h1>Online Bookstore</h1>
+    <h1 class="m-3">Amazon Online Bookstore</h1>
 </div>
 <div class="row">
     <table class="table table-bordered table-striped">
         <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Publisher</th>
-            <th>ISBN</th>
-            <th>Classification/Category</th>
-            <th>Number of Pages</th>
-            <th>Price</th>
+        <tr class="text-center">
+            <th class="col-2 p-3">Title</th>
+            <th class="col-1 p-3">Author</th>
+            <th class="col-1 p-3">Publisher</th>
+            <th class="col-2 p-3">ISBN</th>
+            <th class="col-1 p-3">Classification</th>
+            <th class="col-1 p-3">Category</th>
+            <th class="col-1 p-3">Page Count</th>
+            <th class="col-1 p-3">Price</th>
         </tr>
         </thead>
         @foreach (var b in Model)
         {
             <tbody>
-            <tr>
+            <tr class="text-center">
                 <td>@b.Title</td>
                 <td>@b.Author</td>
                 <td>@b.Publisher</td>
                 <td>@b.Isbn</td>
-                <td>@b.Classification @b.Category</td>
+                <td>@b.Classification</td>
+                <td>@b.Category</td>
                 <td>@b.PageCount</td>
-                <td>@b.Price</td>
+                <td>$@b.Price</td>
             </tr>
             </tbody>
         }
     </table>
+</div>
+<div style="display: flex; justify-content: flex-end;">
+    <nav>
+            <ul class="pagination">
+                <!-- Previous Page Link -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNum = ViewBag.PageNum - 1 })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+        
+                <!-- Page Links -->
+                @for (int i = 1; i <= ViewBag.PageCount + 1; i++)
+                {
+                    <li class="page-item @(i == ViewBag.PageNum ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { pageNum = i })">@i</a>
+                    </li>
+                }
+        
+                <!-- Next Page Link -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNum = ViewBag.PageNum + 1 })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 </div>
