@@ -1,4 +1,48 @@
-﻿
-<div class="text-center">
-    <h1>Home page coming soon</h1>
+﻿using AmazonWebsite.Models.Book
+
+@model List<Book>
+
+<div class="row text-center">
+    <h1>Online Bookstore</h1>
+</div>
+<div class="row">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Classification/Category</th>
+            <th>Number of Pages</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        @{
+            int page = 1;
+            int counter = 0;
+
+            foreach (var b in Model)
+            {
+                <tbody>
+                <tr>
+                    <td>@b.Title</td>
+                    <td>@b.Author</td>
+                    <td>@b.Publisher</td>
+                    <td>@b.Isbn</td>
+                    <td>@b.Classification @b.Category</td>
+                    <td>@b.Pages</td>
+                    <td>@b.Price</td>
+                </tr>
+                </tbody>
+
+                counter++;
+                if (counter == 10)
+                {
+                    page++;
+                }
+            }
+        }
+    </table>
+    <p>Page Num: @page</p>
 </div>

@@ -1,4 +1,5 @@
 using AmazonWebsite.Context;
+using AmazonWebsite.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<BookContext>(options =>
 {
     options.UseSqlite(builder.Configuration["ConnectionStrings:MovieConnection"]);
 });
+
+builder.Services.AddScoped<IBookRepository, EfBookRepository>();
 
 var app = builder.Build();
 
