@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AmazonWebsite.Migrations;
+namespace AmazonWebsite.Models;
 
 public partial class Book
 {

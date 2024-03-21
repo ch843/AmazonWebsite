@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using AmazonWebsite.Migrations;
+using AmazonWebsite.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AmazonWebsite.Context;
 
 public partial class BookContext : DbContext
 {
-    public BookContext()
-    {
-    }
-
-    public BookContext(DbContextOptions<BookContext> options)
-        : base(options)
-    {
-    }
+    public BookContext(DbContextOptions<BookContext> options) : base(options) { }
 
     public virtual DbSet<Book> Books { get; set; }
 
